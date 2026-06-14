@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esqueci minha senha — Nexus Painel</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-page">
+
+  <div class="auth-sidebar">
+    <div class="auth-sidebar-logo">
+      <img src="assets/nexus.webp" alt="Nexus Painel">
+    </div>
+    <div class="auth-sidebar-content">
+      <h2>Tudo que voc&ecirc; precisa para crescer na sua live.</h2>
+      <ul class="auth-sidebar-features">
+        <li><i class="bi bi-check-lg"></i> Dashboard com m&eacute;tricas em tempo real</li>
+        <li><i class="bi bi-check-lg"></i> Agendamento e rascunhos de lives</li>
+        <li><i class="bi bi-check-lg"></i> Gest&atilde;o completa de seguidores</li>
+        <li><i class="bi bi-check-lg"></i> Est&uacute;dio de transmiss&atilde;o integrado</li>
+      </ul>
+    </div>
+    <p class="auth-sidebar-copyright">&copy; 2026 Nexus Painel</p>
+  </div>
+
+  <div class="auth-form-container">
+    <div class="auth-form-wrapper">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/nexus.webp" alt="Nexus Painel">
+      </a>
+
+      <div class="auth-form-header">
+        <h1>Esqueci minha senha</h1>
+        <p>Digite seu e-mail e enviaremos um link para redefinir sua senha.</p>
+      </div>
+
+      <form class="auth-form" id="forgotForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="forgotEmail">E-mail</label>
+          <input class="form-input" type="email" id="forgotEmail" placeholder="seu@email.com" required>
+          <span class="form-error" id="forgotEmailError"><i class="bi bi-exclamation-circle"></i> E-mail inv&aacute;lido</span>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+          <span class="btn-text">Enviar link</span>
+        </button>
+
+        <div class="auth-success-message" id="forgotSuccess">
+          <i class="bi bi-check-circle-fill"></i>
+          <h3>Link enviado!</h3>
+          <p>Verifique seu e-mail para redefinir sua senha.</p>
+        </div>
+
+        <p class="auth-footer-link">
+          <a href="login.html"><i class="bi bi-arrow-left"></i> Voltar para o login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

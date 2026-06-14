@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Studio — Nexus Painel</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="bi bi-list"></i></button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="dashboard-layout">
+
+    <aside class="dashboard-sidebar">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/nexus.webp" alt="Nexus Painel">
+      </a>
+      <span class="sidebar-label">Menu</span>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+        <a href="agendamentos.html" class="sidebar-link"><i class="bi bi-calendar-week"></i> Agendamentos</a>
+        <a href="comunidade.html" class="sidebar-link"><i class="bi bi-people"></i> Comunidade</a>
+        <a href="live-studio.html" class="sidebar-link active"><i class="bi bi-camera-reels"></i> Live Studio</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">L<span class="online-dot"></span></div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Lucas Silva</div>
+            <div class="sidebar-user-handle">@lucassilva</div>
+          </div>
+        </div>
+        <div class="sidebar-footer-links">
+          <a href="configuracoes.html" class="sidebar-link"><i class="bi bi-gear"></i> Configura&ccedil;&otilde;es</a>
+          <a href="login.html" class="sidebar-link" style="color:var(--error);"><i class="bi bi-box-arrow-right"></i> Sair</a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <div class="dashboard-header">
+        <div>
+          <div class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Live Studio</span>
+          </div>
+          <h2 style="font-size:1.6rem;font-weight:700;">Est&uacute;dio de transmiss&atilde;o</h2>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span style="font-family:var(--font-display);font-size:1.2rem;font-weight:600;letter-spacing:0.05em;color:var(--text-secondary);" id="liveTimer">00:00:00</span>
+          <button class="btn-danger btn-sm" id="endLiveBtn">Encerrar live</button>
+        </div>
+      </div>
+
+      <!-- Live Studio Layout -->
+      <div class="live-studio-layout">
+        <!-- Left: Preview + Controls -->
+        <div>
+          <div class="live-preview">
+            <div class="live-preview-placeholder" id="livePreviewPlaceholder">
+              <img src="assets/live-off.webp" alt="Offline" id="liveOfflineImg" onerror="this.remove()">
+              <div class="live-placeholder-fallback" id="liveFallback">
+                <i class="bi bi-camera-video-off"></i>
+                <span>Transmiss&atilde;o offline</span>
+              </div>
+              <video class="live-preview-video" id="liveVideo" autoplay muted playsinline></video>
+            </div>
+            <div class="live-preview-overlay" id="liveOverlay">
+              <div class="live-preview-badge" id="liveBadge">
+                <span class="live-dot"></span>
+                <span id="liveStatusText">LIVE OFF</span>
+              </div>
+              <div class="live-preview-info" id="livePreviewInfo">
+                <div class="viewer-count"><i class="bi bi-people"></i> <span id="viewerCount">0</span></div>
+                <span style="font-size:0.8rem;color:var(--text-tertiary);">espectadores</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Toggle -->
+          <div style="margin:16px 0;display:flex;gap:12px;align-items:center;">
+            <span style="font-size:0.85rem;color:var(--text-secondary);">Status:</span>
+            <button class="btn-secondary btn-sm" id="liveToggleBtn">
+              <i class="bi bi-play-circle"></i> Live On
+            </button>
+          </div>
+
+          <!-- Controls -->
+          <div class="live-controls">
+            <div class="live-control-item" data-control="camera">
+              <i class="bi bi-camera-video"></i>
+              <span>C&acirc;mera</span>
+              <span class="live-control-status off" id="cameraStatus"></span>
+            </div>
+            <div class="live-control-item" data-control="microphone">
+              <i class="bi bi-mic"></i>
+              <span>Microfone</span>
+              <span class="live-control-status off" id="microphoneStatus"></span>
+            </div>
+            <div class="live-control-item" data-control="audio">
+              <i class="bi bi-volume-up"></i>
+              <span>&Aacute;udio</span>
+              <span class="live-control-status off" id="audioStatus"></span>
+            </div>
+            <div class="live-control-item" data-control="connection">
+              <i class="bi bi-wifi"></i>
+              <span>Conex&atilde;o</span>
+              <span class="live-control-status off" id="connectionStatus"></span>
+            </div>
+          </div>
+
+          <!-- Stream Settings -->
+          <div class="chart-card" style="margin-top:24px;">
+            <div class="chart-card-header">
+              <h4>Configura&ccedil;&otilde;es de stream</h4>
+            </div>
+            <div class="stream-settings-grid">
+              <div class="stream-setting-item">
+                <span class="stream-setting-label">Qualidade</span>
+                <span class="stream-setting-value">1080p 60fps</span>
+              </div>
+              <div class="stream-setting-item">
+                <span class="stream-setting-label">Bitrate</span>
+                <span class="stream-setting-value">6.000 kbps</span>
+              </div>
+              <div class="stream-setting-item">
+                <span class="stream-setting-label">Servidor</span>
+                <span class="stream-setting-value">S&atilde;o Paulo</span>
+              </div>
+              <div class="stream-setting-item">
+                <span class="stream-setting-label">Lat&ecirc;ncia</span>
+                <span class="stream-setting-value warning">2.3s <span style="font-size:0.75rem;color:var(--text-tertiary);">(alto)</span></span>
+              </div>
+              <div class="stream-setting-item" style="grid-column:span 2;">
+                <span class="stream-setting-label">Encoder</span>
+                <span class="stream-setting-value">NVENC</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Chat Panel -->
+        <div class="chat-panel">
+          <div class="chat-header">
+            <h4><i class="bi bi-chat-dots"></i> Chat</h4>
+            <span style="font-size:0.85rem;color:var(--text-tertiary);"><span id="chatViewerCount">0</span> espectadores</span>
+          </div>
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-message">
+              <div class="chat-message-header">
+                <span class="viewer-level-badge mod">MOD</span>
+                <span class="chat-message-name" style="color:var(--success);">Jo&atilde;o Santos</span>
+                <span class="chat-message-time">20:14</span>
+              </div>
+              <div class="chat-message-text">Animado pra live de hoje!</div>
+            </div>
+            <div class="chat-message">
+              <div class="chat-message-header">
+                <span class="viewer-level-badge vip">VIP</span>
+                <span class="chat-message-name" style="color:var(--warning);">Rafael Costa</span>
+                <span class="chat-message-time">20:15</span>
+              </div>
+              <div class="chat-message-text">Vai ser top demais!</div>
+            </div>
+            <div class="chat-message">
+              <div class="chat-message-header">
+                <span class="viewer-level-badge sub">SUB</span>
+                <span class="chat-message-name" style="color:var(--nexus-purple-light);">Maria Oliveira</span>
+                <span class="chat-message-time">20:16</span>
+              </div>
+              <div class="chat-message-text">Testando o novo setup?</div>
+            </div>
+          </div>
+          <div class="chat-input-area">
+            <input type="text" placeholder="Enviar mensagem..." id="chatInput">
+            <button id="chatSendBtn"><i class="bi bi-send"></i></button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+/* ==========================================
+   NEXUS PAINEL — Auth Pages (Login, Cadastro, Esqueci Senha)
+   ========================================== */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  background: var(--bg-primary);
+}
+
+.auth-sidebar {
+  flex: 1;
+  max-width: 520px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--spacing-40);
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-sidebar::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(139, 66, 255, 0.04), transparent 60%);
+  pointer-events: none;
+}
+
+.auth-sidebar-logo img {
+  height: 42px;
+  width: auto;
+}
+
+.auth-sidebar-content {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-sidebar-content h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: var(--spacing-32);
+  letter-spacing: -0.02em;
+}
+
+.auth-sidebar-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.auth-sidebar-features li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.auth-sidebar-features li i {
+  color: var(--nexus-purple);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.auth-sidebar-copyright {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  position: relative;
+  z-index: 1;
+}
+
+.auth-form-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-40);
+}
+
+.auth-form-wrapper {
+  width: 100%;
+  max-width: 420px;
+}
+
+.auth-form-wrapper .navbar-logo {
+  display: none;
+  justify-content: center;
+  margin-bottom: var(--spacing-32);
+}
+
+.auth-form-wrapper .navbar-logo img {
+  height: 34px;
+}
+
+.auth-form-header {
+  margin-bottom: var(--spacing-32);
+}
+
+.auth-form-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-8);
+}
+
+.auth-form-header p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-20);
+}
+
+.auth-form .form-group {
+  position: relative;
+}
+
+.auth-form .form-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.auth-form .form-label-row a {
+  font-size: 0.8rem;
+  color: var(--nexus-purple);
+}
+
+.auth-password-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 4px;
+  transition: color var(--transition-fast);
+}
+
+.auth-password-toggle:hover {
+  color: var(--text-secondary);
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+  margin: var(--spacing-8) 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.auth-footer-link {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-8);
+}
+
+.auth-footer-link a {
+  color: var(--nexus-purple);
+  font-weight: 500;
+}
+
+.auth-success-message {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-40) 0;
+}
+
+.auth-success-message.visible {
+  display: flex;
+}
+
+.auth-success-message i {
+  font-size: 3rem;
+  color: var(--success);
+}
+
+.auth-success-message h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.auth-success-message p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.btn-loading .btn-text {
+  visibility: hidden;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+/* Desktop: show sidebar */
+@media (min-width: 768px) {
+  .auth-sidebar {
+    display: flex;
+  }
+}
+
+/* Mobile: hide sidebar, show logo */
+@media (max-width: 767px) {
+  .auth-form-wrapper .navbar-logo {
+    display: flex;
+  }
+  .auth-form-container {
+    padding: var(--spacing-24) var(--spacing-16);
+  }
+}

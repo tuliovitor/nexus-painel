@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamentos — Nexus Painel</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="bi bi-list"></i></button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/nexus.webp" alt="Nexus Painel">
+      </a>
+      <span class="sidebar-label">Menu</span>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+        <a href="agendamentos.html" class="sidebar-link active"><i class="bi bi-calendar-week"></i> Agendamentos</a>
+        <a href="comunidade.html" class="sidebar-link"><i class="bi bi-people"></i> Comunidade</a>
+        <a href="live-studio.html" class="sidebar-link">
+          <i class="bi bi-camera-reels"></i> Live Studio
+          <span class="sidebar-live-badge pulse-red">AO VIVO</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">L<span class="online-dot"></span></div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Lucas Silva</div>
+            <div class="sidebar-user-handle">@lucassilva</div>
+          </div>
+        </div>
+        <div class="sidebar-footer-links">
+          <a href="configuracoes.html" class="sidebar-link"><i class="bi bi-gear"></i> Configura&ccedil;&otilde;es</a>
+          <a href="login.html" class="sidebar-link" style="color:var(--error);"><i class="bi bi-box-arrow-right"></i> Sair</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="dashboard-main">
+      <div class="dashboard-header">
+        <div>
+          <div class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Agendamentos</span>
+          </div>
+          <h2 style="font-size:1.6rem;font-weight:700;">Planejar lives</h2>
+        </div>
+        <button class="btn-primary btn-sm" data-action="nova-live"><i class="bi bi-plus-lg"></i> Nova live</button>
+      </div>
+
+      <!-- Filters -->
+      <div class="filter-pills">
+        <span class="filter-pill active">Todas <span class="count">(12)</span></span>
+        <span class="filter-pill">Agendada <span class="count">(5)</span></span>
+        <span class="filter-pill">Rascunho <span class="count">(4)</span></span>
+        <span class="filter-pill">Planejamento <span class="count">(3)</span></span>
+      </div>
+
+      <!-- Schedule Cards -->
+      <div class="schedule-list">
+        <div class="schedule-card">
+          <div class="schedule-status-bar agendada"></div>
+          <div class="schedule-card-content">
+            <div class="schedule-card-header">
+              <h4>React Native na pr&aacute;tica</h4>
+              <span class="badge badge-green">Agendada</span>
+            </div>
+            <div class="schedule-meta">
+              <span><i class="bi bi-code-slash"></i> Desenvolvimento</span>
+              <span><i class="bi bi-calendar3"></i> 15 Jun 2026</span>
+              <span><i class="bi bi-clock"></i> 20:00 - 22:00</span>
+            </div>
+            <p class="schedule-description">Construindo um aplicativo completo com React Native, abordando navega&ccedil;&atilde;o, estado e API.</p>
+            <div class="schedule-actions">
+              <button class="btn-ghost btn-sm"><i class="bi bi-arrow-right-circle"></i> Mover para: Rascunho</button>
+              <button class="btn-ghost btn-sm" style="color:var(--error);"><i class="bi bi-trash3"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="schedule-card">
+          <div class="schedule-status-bar rascunho"></div>
+          <div class="schedule-card-content">
+            <div class="schedule-card-header">
+              <h4>Review de hardware - Setup 2026</h4>
+              <span class="badge badge-yellow">Rascunho</span>
+            </div>
+            <div class="schedule-meta">
+              <span><i class="bi bi-tools"></i> Tecnologia</span>
+              <span><i class="bi bi-calendar3"></i> 18 Jun 2026</span>
+              <span><i class="bi bi-clock"></i> 19:30 - 21:30</span>
+            </div>
+            <p class="schedule-description">An&aacute;lise completa dos novos componentes de hardware para setup de streaming em 2026.</p>
+            <div class="schedule-actions">
+              <button class="btn-ghost btn-sm"><i class="bi bi-arrow-right-circle"></i> Mover para: Agendada</button>
+              <button class="btn-ghost btn-sm"><i class="bi bi-arrow-right-circle"></i> Mover para: Planejamento</button>
+              <button class="btn-ghost btn-sm" style="color:var(--error);"><i class="bi bi-trash3"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="schedule-card">
+          <div class="schedule-status-bar planejamento"></div>
+          <div class="schedule-card-content">
+            <div class="schedule-card-header">
+              <h4>Q&A com a comunidade</h4>
+              <span class="badge badge-purple">Planejamento</span>
+            </div>
+            <div class="schedule-meta">
+              <span><i class="bi bi-chat-dots"></i> Comunidade</span>
+              <span><i class="bi bi-calendar3"></i> 20 Jun 2026</span>
+              <span><i class="bi bi-clock"></i> 21:00 - 22:30</span>
+            </div>
+            <p class="schedule-description">Sess&atilde;o de perguntas e respostas aberta para toda a comunidade.</p>
+            <div class="schedule-actions">
+              <button class="btn-ghost btn-sm"><i class="bi bi-arrow-right-circle"></i> Mover para: Agendada</button>
+              <button class="btn-ghost btn-sm"><i class="bi bi-arrow-right-circle"></i> Mover para: Rascunho</button>
+              <button class="btn-ghost btn-sm" style="color:var(--error);"><i class="bi bi-trash3"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ===== MODAL NOVA LIVE ===== -->
+  <div class="modal-overlay" id="novaLiveModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3><i class="bi bi-broadcast" style="color:var(--nexus-purple-light);margin-right:8px;"></i>Nova live</h3>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Fechar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-form-body">
+        <div class="form-group">
+          <label class="form-label">T&iacute;tulo *</label>
+          <input class="form-input" type="text" id="ml-title" placeholder="Ex: Gameplay de RPG — Epis&oacute;dio 3">
+          <span class="form-error" id="ml-title-err" style="display:none;">
+            <i class="bi bi-exclamation-circle"></i> T&iacute;tulo obrigat&oacute;rio
+          </span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Categoria</label>
+          <input class="form-input" type="text" id="ml-cat" placeholder="Ex: FPS, RPG, Just Chatting">
+        </div>
+        <div class="modal-row-2">
+          <div class="form-group">
+            <label class="form-label">Data *</label>
+            <input class="form-input" type="date" id="ml-date">
+            <span class="form-error" id="ml-date-err" style="display:none;">
+              <i class="bi bi-exclamation-circle"></i> Obrigat&oacute;rio
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hor&aacute;rio *</label>
+            <input class="form-input" type="time" id="ml-time">
+            <span class="form-error" id="ml-time-err" style="display:none;">
+              <i class="bi bi-exclamation-circle"></i> Obrigat&oacute;rio
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <div class="modal-status-row">
+            <label>
+              <input type="radio" name="ml-status" value="agendada" checked>
+              <span class="badge badge-green">Agendada</span>
+            </label>
+            <label>
+              <input type="radio" name="ml-status" value="rascunho">
+              <span class="badge badge-yellow">Rascunho</span>
+            </label>
+            <label>
+              <input type="radio" name="ml-status" value="planejamento">
+              <span class="badge badge-purple">Planejamento</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Descri&ccedil;&atilde;o</label>
+          <textarea class="form-input" id="ml-desc" rows="3"
+            placeholder="Descreva o conte&uacute;do da live..."
+            style="resize:vertical;min-height:80px;"></textarea>
+        </div>
+        <div class="modal-footer-btns">
+          <button type="button" class="btn-secondary btn-sm" id="modalCancelBtn">Cancelar</button>
+          <button type="button" class="btn-primary btn-sm" id="modalSubmitBtn">
+            <i class="bi bi-plus-lg"></i> <span id="modalSubmitText">Criar live</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

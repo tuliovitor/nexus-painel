@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Nexus Painel</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="bi bi-list"></i></button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/nexus.webp" alt="Nexus Painel">
+      </a>
+
+      <span class="sidebar-label">Menu</span>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link active">
+          <i class="bi bi-grid-1x2-fill"></i> Dashboard
+        </a>
+        <a href="agendamentos.html" class="sidebar-link">
+          <i class="bi bi-calendar-week"></i> Agendamentos
+        </a>
+        <a href="comunidade.html" class="sidebar-link">
+          <i class="bi bi-people"></i> Comunidade
+        </a>
+        <a href="live-studio.html" class="sidebar-link">
+          <i class="bi bi-camera-reels"></i> Live Studio
+          <span class="sidebar-live-badge pulse-red">AO VIVO</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">
+            L
+            <span class="online-dot"></span>
+          </div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Lucas Silva</div>
+            <div class="sidebar-user-handle">@lucassilva</div>
+          </div>
+        </div>
+        <div class="sidebar-footer-links">
+          <a href="configuracoes.html" class="sidebar-link"><i class="bi bi-gear"></i> Configura&ccedil;&otilde;es</a>
+          <a href="login.html" class="sidebar-link" style="color:var(--error);"><i class="bi bi-box-arrow-right"></i> Sair</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+
+      <!-- Header -->
+      <div class="dashboard-header">
+        <div class="dashboard-header-left">
+          <h2>Ol&aacute;, Lucas</h2>
+          <div class="date-display" id="dateDisplay"></div>
+        </div>
+        <div class="dashboard-header-right">
+          <span class="badge badge-red pulse-red"><i class="bi bi-broadcast"></i> Ao vivo agora</span>
+          <button class="btn-primary btn-sm" data-action="nova-live"><i class="bi bi-plus-lg"></i> Nova live</button>
+        </div>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon"><i class="bi bi-eye"></i></div>
+          <div class="kpi-value">12.458</div>
+          <div class="kpi-label">Visualiza&ccedil;&otilde;es (7d)</div>
+          <div class="kpi-change up"><i class="bi bi-arrow-up-short"></i> +23.4%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:rgba(74,222,128,0.1);color:var(--success);"><i class="bi bi-person-plus"></i></div>
+          <div class="kpi-value">347</div>
+          <div class="kpi-label">Novos seguidores</div>
+          <div class="kpi-change up"><i class="bi bi-arrow-up-short"></i> +12.8%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:rgba(251,191,36,0.1);color:var(--warning);"><i class="bi bi-clock"></i></div>
+          <div class="kpi-value">186</div>
+          <div class="kpi-label">Horas transmitidas</div>
+          <div class="kpi-change up"><i class="bi bi-arrow-up-short"></i> +5.2%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:rgba(248,113,113,0.1);color:var(--error);"><i class="bi bi-people"></i></div>
+          <div class="kpi-value">2.380</div>
+          <div class="kpi-label">Avg. espectadores</div>
+          <div class="kpi-change down"><i class="bi bi-arrow-down-short"></i> -3.1%</div>
+        </div>
+      </div>
+
+      <!-- Main Grid -->
+      <div class="dashboard-grid">
+        <!-- Chart -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <h4>Desempenho semanal</h4>
+            <div class="chart-legend">
+              <span class="chart-legend-item">
+                <span class="chart-legend-dot" style="background:var(--nexus-purple);"></span>
+                Visualiza&ccedil;&otilde;es
+              </span>
+              <span class="chart-legend-item">
+                <span class="chart-legend-dot" style="background:var(--success);"></span>
+                Seguidores
+              </span>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="weeklyChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Top Viewers -->
+        <div class="top-viewers-card">
+          <h4>Top viewers</h4>
+          <div class="viewer-item">
+            <span class="viewer-rank">01</span>
+            <div class="viewer-avatar-sm" style="background:rgba(251,191,36,0.15);color:var(--warning);">R</div>
+            <div class="viewer-info">
+              <div class="viewer-name">Rafael Costa</div>
+            </div>
+            <span class="viewer-level-badge vip">VIP</span>
+            <span class="viewer-time">42h</span>
+          </div>
+          <div class="viewer-item">
+            <span class="viewer-rank">02</span>
+            <div class="viewer-avatar-sm" style="background:rgba(139,66,255,0.15);color:var(--nexus-purple-light);">M</div>
+            <div class="viewer-info">
+              <div class="viewer-name">Maria Oliveira</div>
+            </div>
+            <span class="viewer-level-badge sub">SUB</span>
+            <span class="viewer-time">38h</span>
+          </div>
+          <div class="viewer-item">
+            <span class="viewer-rank">03</span>
+            <div class="viewer-avatar-sm" style="background:rgba(74,222,128,0.15);color:var(--success);">J</div>
+            <div class="viewer-info">
+              <div class="viewer-name">Jo&atilde;o Santos</div>
+            </div>
+            <span class="viewer-level-badge mod">MOD</span>
+            <span class="viewer-time">31h</span>
+          </div>
+          <div class="viewer-item">
+            <span class="viewer-rank">04</span>
+            <div class="viewer-avatar-sm" style="background:rgba(139,66,255,0.15);color:var(--nexus-purple-light);">A</div>
+            <div class="viewer-info">
+              <div class="viewer-name">Ana Pereira</div>
+            </div>
+            <span class="viewer-level-badge sub">SUB</span>
+            <span class="viewer-time">27h</span>
+          </div>
+          <div class="viewer-item">
+            <span class="viewer-rank">05</span>
+            <div class="viewer-avatar-sm" style="background:rgba(255,255,255,0.1);color:var(--text-secondary);">P</div>
+            <div class="viewer-info">
+              <div class="viewer-name">Pedro Lima</div>
+            </div>
+            <span class="viewer-level-badge" style="background:rgba(255,255,255,0.06);color:var(--text-secondary);">NEW</span>
+            <span class="viewer-time">15h</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="dashboard-section">
+        <div class="dashboard-section-header">
+          <h3>A&ccedil;&otilde;es r&aacute;pidas</h3>
+        </div>
+        <div class="quick-actions">
+          <div class="quick-action-item">
+            <i class="bi bi-play-circle"></i>
+            <span>Iniciar live agora</span>
+            <i class="bi bi-chevron-right"></i>
+          </div>
+          <div class="quick-action-item">
+            <i class="bi bi-calendar-plus"></i>
+            <span>Agendar live</span>
+            <i class="bi bi-chevron-right"></i>
+          </div>
+          <div class="quick-action-item">
+            <i class="bi bi-people"></i>
+            <span>Ver comunidade</span>
+            <i class="bi bi-chevron-right"></i>
+          </div>
+          <div class="quick-action-item">
+            <i class="bi bi-graph-up"></i>
+            <span>Analytics</span>
+            <i class="bi bi-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Lives -->
+      <div class="dashboard-section">
+        <div class="dashboard-section-header">
+          <h3>Lives recentes</h3>
+          <a href="#" style="font-size:0.85rem;">Ver todas <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="recent-lives">
+          <div class="recent-live-item">
+            <div class="recent-live-thumb"><i class="bi bi-play-fill"></i></div>
+            <div class="recent-live-info">
+              <div class="recent-live-title">React Native na pr&aacute;tica - Criando um app do zero</div>
+              <div class="recent-live-meta">
+                <span class="recent-live-badge">LIVE</span>
+                <span>12 Jun, 20:00</span>
+                <span>&middot; 2h14min</span>
+              </div>
+            </div>
+            <span class="recent-live-views"><i class="bi bi-eye"></i> 3.124</span>
+          </div>
+          <div class="recent-live-item">
+            <div class="recent-live-thumb"><i class="bi bi-play-fill"></i></div>
+            <div class="recent-live-info">
+              <div class="recent-live-title">Review de hardware - Setup 2026</div>
+              <div class="recent-live-meta">
+                <span>10 Jun, 19:30</span>
+                <span>&middot; 1h48min</span>
+              </div>
+            </div>
+            <span class="recent-live-views"><i class="bi bi-eye"></i> 2.890</span>
+          </div>
+          <div class="recent-live-item">
+            <div class="recent-live-thumb"><i class="bi bi-play-fill"></i></div>
+            <div class="recent-live-info">
+              <div class="recent-live-title">Q&A com a comunidade - Suas perguntas respondidas</div>
+              <div class="recent-live-meta">
+                <span>08 Jun, 21:00</span>
+                <span>&middot; 1h02min</span>
+              </div>
+            </div>
+            <span class="recent-live-views"><i class="bi bi-eye"></i> 4.567</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ===== MODAL NOVA LIVE ===== -->
+  <div class="modal-overlay" id="novaLiveModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3><i class="bi bi-broadcast" style="color:var(--nexus-purple-light);margin-right:8px;"></i>Nova live</h3>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Fechar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-form-body">
+        <div class="form-group">
+          <label class="form-label">T&iacute;tulo *</label>
+          <input class="form-input" type="text" id="ml-title" placeholder="Ex: Gameplay de RPG — Epis&oacute;dio 3">
+          <span class="form-error" id="ml-title-err" style="display:none;">
+            <i class="bi bi-exclamation-circle"></i> T&iacute;tulo obrigat&oacute;rio
+          </span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Categoria</label>
+          <input class="form-input" type="text" id="ml-cat" placeholder="Ex: FPS, RPG, Just Chatting">
+        </div>
+        <div class="modal-row-2">
+          <div class="form-group">
+            <label class="form-label">Data *</label>
+            <input class="form-input" type="date" id="ml-date">
+            <span class="form-error" id="ml-date-err" style="display:none;">
+              <i class="bi bi-exclamation-circle"></i> Obrigat&oacute;rio
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hor&aacute;rio *</label>
+            <input class="form-input" type="time" id="ml-time">
+            <span class="form-error" id="ml-time-err" style="display:none;">
+              <i class="bi bi-exclamation-circle"></i> Obrigat&oacute;rio
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <div class="modal-status-row">
+            <label>
+              <input type="radio" name="ml-status" value="agendada" checked>
+              <span class="badge badge-green">Agendada</span>
+            </label>
+            <label>
+              <input type="radio" name="ml-status" value="rascunho">
+              <span class="badge badge-yellow">Rascunho</span>
+            </label>
+            <label>
+              <input type="radio" name="ml-status" value="planejamento">
+              <span class="badge badge-purple">Planejamento</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Descri&ccedil;&atilde;o</label>
+          <textarea class="form-input" id="ml-desc" rows="3"
+            placeholder="Descreva o conte&uacute;do da live..."
+            style="resize:vertical;min-height:80px;"></textarea>
+        </div>
+        <div class="modal-footer-btns">
+          <button type="button" class="btn-secondary btn-sm" id="modalCancelBtn">Cancelar</button>
+          <button type="button" class="btn-primary btn-sm" id="modalSubmitBtn">
+            <i class="bi bi-plus-lg"></i> <span id="modalSubmitText">Criar live</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

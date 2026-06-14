@@ -1,0 +1,18 @@
+{
+  "name": "nexus-painel",
+  "version": "1.0.0",
+  "description": "Nexus Painel — Plataforma de Gestão para Criadores de Conteúdo",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx live-server --port=3000",
+    "build": "echo 'Build step not configured yet'"
+  },
+  "dependencies": {
+    "bootstrap-icons": "^1.11.3",
+    "gsap": "^3.12.5",
+    "three": "^0.170.0",
+    "chart.js": "^4.4.7"
+  },
+  "keywords": ["streaming", "dashboard", "creator", "saas"],
+  "license": "MIT"
+}

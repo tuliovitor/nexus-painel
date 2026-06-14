@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Painel — Plataforma para Criadores de Conteúdo</title>
+  <meta name="description" content="Nexus Painel: gerencie suas transmissões, comunidade e analytics em uma plataforma premium.">
+  <script>
+    (function() {
+      document.addEventListener('DOMContentLoaded', function() {
+        var pre = document.getElementById('preloader');
+        if (pre) {
+          pre.style.display = '';
+          pre.style.clipPath = 'circle(150% at 50% 50%)';
+          pre.style.opacity  = '1';
+          pre.style.visibility = 'visible';
+        }
+      });
+    })();
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+  <!-- ==================== PRELOADER ==================== -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-logo" id="preloaderLogo">
+      <svg viewBox="0 0 717 499" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="nexusGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#A95EFF"/>
+            <stop offset="100%" stop-color="#7D2EFF"/>
+          </linearGradient>
+        </defs>
+
+        <!-- NEXUS -->
+        <path class="draw" d="M215,230 L215,110 L267,230 L267,110" fill="none" stroke="url(#nexusGradient)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="draw" d="M279,230 L279,110 L329,110 M279,170 L319,170 M279,230 L329,230" fill="none" stroke="url(#nexusGradient)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="draw" d="M341,110 L391,230 M391,110 L341,230" fill="none" stroke="url(#nexusGradient)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="draw" d="M403,150 L403,210 Q403,230 428,230 Q453,230 453,210 L453,150" fill="none" stroke="url(#nexusGradient)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="draw" d="M505,110 L470,110 Q460,110 460,130 Q460,150 485,170 Q505,185 505,205 Q505,230 470,230" fill="none" stroke="url(#nexusGradient)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- PAINEL -->
+        <path class="draw" d="M185,410 L185,290 L230,290 Q240,290 240,310 Q240,330 230,350 L185,350" fill="none" stroke="#F5F5F7" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="draw" d="M252,410 L287,290 L322,410 M273,360 L301,360" fill="none" stroke="#F5F5F7" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="draw" d="M347,290 L347,410" fill="none" stroke="#F5F5F7" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="draw" d="M372,410 L372,290 L424,410 L424,290" fill="none" stroke="#F5F5F7" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="draw" d="M436,410 L436,290 L486,290 M436,350 L476,350 M436,410 L486,410" fill="none" stroke="#F5F5F7" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="draw" d="M498,290 L498,410 L548,410" fill="none" stroke="#F5F5F7" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/nexus.webp" alt="Nexus Painel">
+      </a>
+      <div class="navbar-links" id="navLinks">
+        <a href="login.html" class="btn-ghost">Entrar</a>
+        <a href="cadastro.html" class="btn-primary">Criar conta</a>
+      </div>
+    </div>
+  </nav>
+
+      <!-- ==================== HERO ==================== -->
+      <section class="hero" id="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-floating hero-floating-1" id="float1"></div>
+        <div class="hero-floating hero-floating-2" id="float2"></div>
+        <div class="hero-floating hero-floating-3" id="float3"></div>
+        <div class="hero-floating hero-floating-4" id="float4"></div>
+        <div class="hero-floating hero-floating-5" id="float5"></div>
+
+        <div class="hero-content" id="heroContent">
+          <div class="hero-badge" id="heroBadge">
+            <i class="bi bi-lightning-fill"></i>
+            <span>Plataforma para criadores de conte&uacute;do</span>
+          </div>
+
+          <h1 class="hero-title" id="heroTitle">
+            O jeito mais inteligente<br>
+            de <span class="text-gradient">fazer streaming</span>
+          </h1>
+
+          <p class="hero-subtitle" id="heroSubtitle">
+            Gerencie transmiss&otilde;es, acompanhe m&eacute;tricas em tempo real e
+            construa sua comunidade com ferramentas profissionais em um s&oacute; lugar.
+          </p>
+
+          <div class="hero-cta" id="heroCta">
+            <a href="cadastro.html" class="btn-primary">
+              Come&ccedil;ar gratuitamente
+              <i class="bi bi-arrow-right"></i>
+            </a>
+            <a href="login.html" class="btn-secondary">
+              <i class="bi bi-person"></i>
+              J&aacute; tenho conta
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== FEATURES ==================== -->
+      <section class="features" id="features">
+        <div class="features-grid">
+          <div class="feature-card" data-delay="0">
+            <div class="feature-icon">
+              <i class="bi bi-broadcast"></i>
+            </div>
+            <h3>Transmiss&atilde;o ao vivo</h3>
+            <p>Inicie transmiss&otilde;es direto do painel com um clique. Controle total de c&acirc;mera, microfone e qualidade.</p>
+          </div>
+          <div class="feature-card" data-delay="1">
+            <div class="feature-icon">
+              <i class="bi bi-calendar-check"></i>
+            </div>
+            <h3>Agendamento de lives</h3>
+            <p>Planeje sua grade de transmiss&otilde;es com rascunhos e lembretes autom&aacute;ticos para sua comunidade.</p>
+          </div>
+          <div class="feature-card" data-delay="2">
+            <div class="feature-icon">
+              <i class="bi bi-graph-up-arrow"></i>
+            </div>
+            <h3>Analytics detalhado</h3>
+            <p>M&eacute;tricas em tempo real de visualiza&ccedil;&otilde;es, seguidores, engajamento e crescimento semanal.</p>
+          </div>
+          <div class="feature-card" data-delay="3">
+            <div class="feature-icon">
+              <i class="bi bi-people"></i>
+            </div>
+            <h3>Gest&atilde;o da comunidade</h3>
+            <p>Conhe&ccedil;a seus espectadores mais engajados com rankings, n&iacute;veis e hist&oacute;rico de participa&ccedil;&atilde;o.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PHILOSOPHY ==================== -->
+      <section class="philosophy" id="philosophy">
+        <div class="philosophy-bg"></div>
+        <div class="philosophy-content">
+          <p class="philosophy-label">Nexus Philosophy</p>
+          <div class="philosophy-text" id="philosophyText">
+            <span class="philosophy-word">Transmitir</span>
+            <span class="philosophy-word">n&atilde;o</span>
+            <span class="philosophy-word">deve</span>
+            <span class="philosophy-word">ser</span>
+            <span class="philosophy-word">complicado.</span><br>
+            <span class="philosophy-word">O</span>
+            <span class="philosophy-word">Nexus</span>
+            <span class="philosophy-word">Painel</span>
+            <span class="philosophy-word">existe</span>
+            <span class="philosophy-word">para</span>
+            <span class="philosophy-word">transformar</span>
+            <span class="philosophy-word">ideias</span><br>
+            <span class="philosophy-word">em</span>
+            <span class="philosophy-word">transmiss&otilde;es</span>
+            <span class="philosophy-word">profissionais,</span><br>
+            <span class="philosophy-word">conectando</span>
+            <span class="philosophy-word">criadores,</span>
+            <span class="philosophy-word">comunidade</span>
+            <span class="philosophy-word">e</span>
+            <span class="philosophy-word">crescimento</span><br>
+            <span class="philosophy-word">em</span>
+            <span class="philosophy-word">uma</span>
+            <span class="philosophy-word">&uacute;nica</span>
+            <span class="philosophy-word">plataforma.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== JORNADA ==================== -->
+      <section class="jornada" id="jornada">
+        <div class="jornada-header">
+          <h2>Sua jornada dentro da Nexus</h2>
+          <p class="text-secondary">Em poucos minutos voc&ecirc; j&aacute; estar&aacute; pronto para transmitir.</p>
+        </div>
+        <div class="jornada-grid">
+          <div class="jornada-card" data-tilt>
+            <span class="jornada-number">01</span>
+            <div class="jornada-icon"><i class="bi bi-gear-wide-connected"></i></div>
+            <h3>Configure seu canal</h3>
+            <p>Personalize seu perfil e defina as configura&ccedil;&otilde;es de transmiss&atilde;o ideais para o seu conte&uacute;do.</p>
+          </div>
+          <div class="jornada-card" data-tilt>
+            <span class="jornada-number">02</span>
+            <div class="jornada-icon"><i class="bi bi-plug"></i></div>
+            <h3>Conecte seu software</h3>
+            <p>Integre com OBS, Streamlabs ou XSplit em segundos. O Nexus reconhece automaticamente suas configura&ccedil;&otilde;es.</p>
+          </div>
+          <div class="jornada-card" data-tilt>
+            <span class="jornada-number">03</span>
+            <div class="jornada-icon"><i class="bi bi-calendar-event"></i></div>
+            <h3>Agende uma live</h3>
+            <p>Crie rascunhos, defina hor&aacute;rios e categorize suas transmiss&otilde;es para manter sua audi&ecirc;ncia informada.</p>
+          </div>
+          <div class="jornada-card" data-tilt>
+            <span class="jornada-number">04</span>
+            <div class="jornada-icon"><i class="bi bi-play-circle"></i></div>
+            <h3>Comece a transmitir</h3>
+            <p>Com tudo pronto, inicie sua primeira live com um clique e acompanhe as m&eacute;tricas em tempo real.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== FOOTER ==================== -->
+      <footer class="footer">
+        <div class="container">
+          <p>&copy; 2026 Nexus Painel. Todos os direitos reservados.</p>
+        </div>
+      </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/three-hero.js"></script>
+  <script src="js/landing.js"></script>
+</body>
+</html>

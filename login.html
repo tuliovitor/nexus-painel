@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar — Nexus Painel</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-page">
+
+  <div class="auth-sidebar">
+    <div class="auth-sidebar-logo">
+      <img src="assets/nexus.webp" alt="Nexus Painel">
+    </div>
+    <div class="auth-sidebar-content">
+      <h2>Tudo que voc&ecirc; precisa para crescer na sua live.</h2>
+      <ul class="auth-sidebar-features">
+        <li><i class="bi bi-check-lg"></i> Dashboard com m&eacute;tricas em tempo real</li>
+        <li><i class="bi bi-check-lg"></i> Agendamento e rascunhos de lives</li>
+        <li><i class="bi bi-check-lg"></i> Gest&atilde;o completa de seguidores</li>
+        <li><i class="bi bi-check-lg"></i> Est&uacute;dio de transmiss&atilde;o integrado</li>
+      </ul>
+    </div>
+    <p class="auth-sidebar-copyright">&copy; 2026 Nexus Painel</p>
+  </div>
+
+  <div class="auth-form-container">
+    <div class="auth-form-wrapper">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/nexus.webp" alt="Nexus Painel">
+      </a>
+
+      <div class="auth-form-header">
+        <h1>Entrar na conta</h1>
+        <p>Acesse seu painel para gerenciar suas transmiss&otilde;es.</p>
+      </div>
+
+      <form class="auth-form" id="loginForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">E-mail</label>
+          <input class="form-input" type="email" id="loginEmail" placeholder="seu@email.com" required>
+          <span class="form-error" id="loginEmailError"><i class="bi bi-exclamation-circle"></i> E-mail inv&aacute;lido</span>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label-row">
+            <label class="form-label" for="loginPassword">Senha</label>
+            <a href="esqueci-senha.html">Esqueci minha senha</a>
+          </div>
+          <div style="position:relative;">
+            <input class="form-input" type="password" id="loginPassword" placeholder="Sua senha" required minlength="8">
+            <button type="button" class="auth-password-toggle" id="loginPasswordToggle">
+              <i class="bi bi-eye-slash"></i>
+            </button>
+          </div>
+          <span class="form-error" id="loginPasswordError"><i class="bi bi-exclamation-circle"></i> Senha deve ter no m&iacute;nimo 8 caracteres</span>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+          <span class="btn-text">Entrar</span>
+        </button>
+
+        <div class="auth-divider">ou</div>
+
+        <p class="auth-footer-link">
+          N&atilde;o tem conta? <a href="cadastro.html">Criar conta gratuita</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

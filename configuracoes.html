@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações — Nexus Painel</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <style>
+    /* Config page specific styles */
+    .config-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: var(--spacing-24);
+    }
+
+    .config-tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .config-tab {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-12);
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      border: none;
+      background: none;
+      text-align: left;
+      width: 100%;
+    }
+
+    .config-tab:hover {
+      background: rgba(255,255,255,0.04);
+      color: var(--text-primary);
+    }
+
+    .config-tab.active {
+      background: rgba(139,66,255,0.12);
+      color: var(--nexus-purple-light);
+      font-weight: 500;
+    }
+
+    .config-tab i {
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    .config-panel {
+      display: none;
+    }
+
+    .config-panel.active {
+      display: block;
+    }
+
+    .config-panel h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing-24);
+    }
+
+    .config-section {
+      margin-bottom: var(--spacing-32);
+    }
+
+    .config-section h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing-16);
+      color: var(--text-secondary);
+    }
+
+    .config-avatar-upload {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-20);
+      margin-bottom: var(--spacing-24);
+    }
+
+    .config-avatar-preview {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 600;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .config-avatar-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .config-stream-key {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .config-stream-key .key-value {
+      flex: 1;
+      word-break: break-all;
+    }
+
+    .toggle-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-16);
+    }
+
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--spacing-12) var(--spacing-16);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+    }
+
+    .toggle-item-info h5 {
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .toggle-item-info p {
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+    }
+
+    .toggle-switch {
+      width: 40px;
+      height: 22px;
+      border-radius: 11px;
+      background: var(--text-tertiary);
+      position: relative;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+      flex-shrink: 0;
+    }
+
+    .toggle-switch.on {
+      background: var(--nexus-purple);
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform var(--transition-fast);
+    }
+
+    .toggle-switch.on::after {
+      transform: translateX(18px);
+    }
+
+    @media (max-width: 767px) {
+      .config-layout {
+        grid-template-columns: 1fr;
+      }
+      .config-tabs {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        margin-bottom: var(--spacing-16);
+      }
+      .config-tab {
+        white-space: nowrap;
+        width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="bi bi-list"></i></button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="dashboard-layout">
+
+    <aside class="dashboard-sidebar">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/nexus.webp" alt="Nexus Painel">
+      </a>
+      <span class="sidebar-label">Menu</span>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+        <a href="agendamentos.html" class="sidebar-link"><i class="bi bi-calendar-week"></i> Agendamentos</a>
+        <a href="comunidade.html" class="sidebar-link"><i class="bi bi-people"></i> Comunidade</a>
+        <a href="live-studio.html" class="sidebar-link"><i class="bi bi-camera-reels"></i> Live Studio</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">
+            L
+            <span class="online-dot"></span>
+          </div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Lucas Silva</div>
+            <div class="sidebar-user-handle">@lucassilva</div>
+          </div>
+        </div>
+        <div class="sidebar-footer-links">
+          <a href="configuracoes.html" class="sidebar-link active"><i class="bi bi-gear"></i> Configura&ccedil;&otilde;es</a>
+          <a href="login.html" class="sidebar-link" style="color:var(--error);"><i class="bi bi-box-arrow-right"></i> Sair</a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <div class="dashboard-header">
+        <div>
+          <div class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Configura&ccedil;&otilde;es</span>
+          </div>
+          <h2 style="font-size:1.6rem;font-weight:700;">Configura&ccedil;&otilde;es</h2>
+        </div>
+      </div>
+
+      <div class="config-layout">
+
+        <!-- Tabs -->
+        <div class="config-tabs">
+          <button class="config-tab active" data-tab="perfil">
+            <i class="bi bi-person"></i> Perfil
+          </button>
+          <button class="config-tab" data-tab="conta">
+            <i class="bi bi-shield-lock"></i> Conta
+          </button>
+          <button class="config-tab" data-tab="notificacoes">
+            <i class="bi bi-bell"></i> Notifica&ccedil;&otilde;es
+          </button>
+          <button class="config-tab" data-tab="streaming">
+            <i class="bi bi-camera-reels"></i> Streaming
+          </button>
+        </div>
+
+        <!-- Panels -->
+        <div class="config-panels">
+
+          <!-- Perfil -->
+          <div class="config-panel active" id="panel-perfil">
+            <h3>Perfil</h3>
+
+            <div class="config-section">
+              <h4>Foto de perfil</h4>
+              <div class="config-avatar-upload">
+                <div class="config-avatar-preview" id="configAvatarPreview">L</div>
+                <div>
+                  <input type="file" accept="image/*" id="avatarUpload" style="display:none;">
+                  <button class="btn-secondary btn-sm" id="avatarUploadBtn"><i class="bi bi-camera"></i> Alterar foto</button>
+                  <p style="font-size:0.78rem;color:var(--text-tertiary);margin-top:6px;">PNG ou JPG. M&aacute;ximo 2MB.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="config-section">
+              <h4>Informa&ccedil;&otilde;es b&aacute;sicas</h4>
+              <div class="form-group">
+                <label class="form-label">Nome</label>
+                <input class="form-input" id="configName" value="Lucas Silva">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nome de usu&aacute;rio</label>
+                <input class="form-input" id="configUsername" value="lucassilva">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Bio</label>
+                <textarea class="form-input" id="configBio" rows="3" placeholder="Conte um pouco sobre voc&ecirc;...">Criador de conte&uacute;do focado em desenvolvimento e tecnologia.</textarea>
+              </div>
+              <button class="btn-primary btn-sm" id="configSavePerfil">Salvar altera&ccedil;&otilde;es</button>
+            </div>
+          </div>
+
+          <!-- Conta -->
+          <div class="config-panel" id="panel-conta">
+            <h3>Conta</h3>
+
+            <div class="config-section">
+              <h4>Email</h4>
+              <div class="form-group">
+                <label class="form-label">Email atual</label>
+                <input class="form-input" value="lucas@exemplo.com" disabled style="opacity:0.6;">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Alterar senha</label>
+                <input class="form-input" type="password" placeholder="Senha atual">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nova senha</label>
+                <input class="form-input" type="password" placeholder="Nova senha">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Confirmar nova senha</label>
+                <input class="form-input" type="password" placeholder="Confirmar nova senha">
+              </div>
+              <button class="btn-primary btn-sm">Atualizar conta</button>
+            </div>
+
+            <div class="config-section" style="opacity:0.5;pointer-events:none;">
+              <h4>Perigosos</h4>
+              <p style="font-size:0.85rem;color:var(--text-tertiary);margin-bottom:12px;">A&ccedil;&otilde;es irrevers&iacute;veis. Desabilitado at&eacute; a integra&ccedil;&atilde;o com o backend.</p>
+              <button class="btn-danger btn-sm"><i class="bi bi-exclamation-triangle"></i> Excluir conta</button>
+            </div>
+          </div>
+
+          <!-- Notificações -->
+          <div class="config-panel" id="panel-notificacoes">
+            <h3>Notifica&ccedil;&otilde;es</h3>
+
+            <div class="config-section">
+              <h4>Prefer&ecirc;ncias</h4>
+              <div class="toggle-group">
+                <div class="toggle-item">
+                  <div class="toggle-item-info">
+                    <h5>Novos seguidores</h5>
+                    <p>Receba uma notifica&ccedil;&atilde;o quando algu&eacute;m seguir voc&ecirc;</p>
+                  </div>
+                  <div class="toggle-switch on"></div>
+                </div>
+                <div class="toggle-item">
+                  <div class="toggle-item-info">
+                    <h5>Gifts e doa&ccedil;&otilde;es</h5>
+                    <p>Notifique quando receber gifts ou doa&ccedil;&otilde;es</p>
+                  </div>
+                  <div class="toggle-switch on"></div>
+                </div>
+                <div class="toggle-item">
+                  <div class="toggle-item-info">
+                    <h5>Lembrete de live</h5>
+                    <p>Lembrete 30 minutos antes de uma live agendada</p>
+                  </div>
+                  <div class="toggle-switch on"></div>
+                </div>
+                <div class="toggle-item">
+                  <div class="toggle-item-info">
+                    <h5>Relat&oacute;rio semanal</h5>
+                    <p>Resumo de desempenho toda segunda-feira</p>
+                  </div>
+                  <div class="toggle-switch"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Streaming -->
+          <div class="config-panel" id="panel-streaming">
+            <h3>Streaming</h3>
+
+            <div class="config-section">
+              <h4>Chave de stream</h4>
+              <p style="font-size:0.85rem;color:var(--text-tertiary);margin-bottom:12px;">Use esta chave no seu software de transmiss&atilde;o (OBS, Streamlabs, etc.)</p>
+              <div class="config-stream-key">
+                <span class="key-value">live_nexus_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6</span>
+                <button class="btn-ghost btn-sm" id="copyStreamKey"><i class="bi bi-clipboard"></i></button>
+              </div>
+              <button class="btn-secondary btn-sm" style="margin-top:12px;"><i class="bi bi-arrow-repeat"></i> Regenerar chave</button>
+            </div>
+
+            <div class="config-section">
+              <h4>Configura&ccedil;&otilde;es padr&atilde;o</h4>
+              <div class="form-group">
+                <label class="form-label">Qualidade padr&atilde;o</label>
+                <select class="form-input">
+                  <option>1080p 60fps</option>
+                  <option>720p 60fps</option>
+                  <option>720p 30fps</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Bitrate padr&atilde;o</label>
+                <select class="form-input">
+                  <option>6.000 kbps</option>
+                  <option>4.500 kbps</option>
+                  <option>3.000 kbps</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Servidor de ingest</label>
+                <select class="form-input">
+                  <option>S&atilde;o Paulo (BR-SP)</option>
+                  <option>Rio de Janeiro (BR-RJ)</option>
+                  <option>Miami (US-FL)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      /* ---------- TAB SWITCHING ---------- */
+      var tabs = document.querySelectorAll('.config-tab');
+      var panels = {
+        perfil: document.getElementById('panel-perfil'),
+        conta: document.getElementById('panel-conta'),
+        notificacoes: document.getElementById('panel-notificacoes'),
+        streaming: document.getElementById('panel-streaming')
+      };
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var target = this.getAttribute('data-tab');
+
+          tabs.forEach(function (t) { t.classList.remove('active'); });
+          this.classList.add('active');
+
+          Object.keys(panels).forEach(function (key) {
+            if (panels[key]) panels[key].classList.remove('active');
+          });
+
+          var panel = panels[target];
+          if (panel) panel.classList.add('active');
+        });
+      });
+
+      /* ---------- TOGGLE SWITCH ---------- */
+      document.querySelectorAll('.toggle-switch').forEach(function (toggle) {
+        toggle.addEventListener('click', function () {
+          this.classList.toggle('on');
+        });
+      });
+
+      /* ---------- AVATAR UPLOAD TRIGGER ---------- */
+      var uploadBtn = document.getElementById('avatarUploadBtn');
+      var uploadInput = document.getElementById('avatarUpload');
+      if (uploadBtn && uploadInput) {
+        uploadBtn.addEventListener('click', function () {
+          uploadInput.click();
+        });
+      }
+
+      /* ---------- COPY STREAM KEY ---------- */
+      var copyBtn = document.getElementById('copyStreamKey');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+          var keyEl = document.querySelector('.config-stream-key .key-value');
+          if (keyEl) {
+            navigator.clipboard.writeText(keyEl.textContent).then(function () {
+              copyBtn.innerHTML = '<i class="bi bi-check-lg"></i>';
+              setTimeout(function () {
+                copyBtn.innerHTML = '<i class="bi bi-clipboard"></i>';
+              }, 2000);
+            }).catch(function () {
+              // Fallback for older browsers
+              var textArea = document.createElement('textarea');
+              textArea.value = keyEl.textContent;
+              document.body.appendChild(textArea);
+              textArea.select();
+              document.execCommand('copy');
+              document.body.removeChild(textArea);
+              copyBtn.innerHTML = '<i class="bi bi-check-lg"></i>';
+              setTimeout(function () {
+                copyBtn.innerHTML = '<i class="bi bi-clipboard"></i>';
+              }, 2000);
+            });
+          }
+        });
+      }
+
+      /* ---------- CONFIG AVATAR ---------- */
+      if (uploadInput) {
+        uploadInput.addEventListener('change', function () {
+          var file = this.files[0];
+          if (!file) return;
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            var dataUrl = e.target.result;
+            var preview = document.getElementById('configAvatarPreview');
+            if (preview) {
+              preview.innerHTML = '<img src="' + dataUrl + '" alt="Avatar">';
+            }
+            // dashboard.js handles localStorage and sidebar update
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      /* ---------- LOAD USER DATA ---------- */
+      var stored = localStorage.getItem('nexus_user');
+      if (stored) {
+        try {
+          var user = JSON.parse(stored);
+          var nameInput = document.getElementById('configName');
+          var usernameInput = document.getElementById('configUsername');
+          var avatarPreview = document.getElementById('configAvatarPreview');
+
+          if (nameInput && user.name) nameInput.value = user.name;
+          if (usernameInput && user.handle) usernameInput.value = user.handle.replace('@', '');
+          if (avatarPreview && user.avatar) {
+            avatarPreview.innerHTML = '<img src="' + user.avatar + '" alt="Avatar">';
+          }
+        } catch (e) {}
+      }
+
+      /* ---------- SAVE PERFIL ---------- */
+      var saveBtn = document.getElementById('configSavePerfil');
+      if (saveBtn) {
+        saveBtn.addEventListener('click', function () {
+          var name = document.getElementById('configName');
+          var username = document.getElementById('configUsername');
+
+          var userData = {
+            name: name ? name.value : 'Usu&aacute;rio',
+            handle: '@' + (username ? username.value : 'usuario'),
+            avatar: null
+          };
+
+          var stored = localStorage.getItem('nexus_user');
+          if (stored) {
+            try {
+              var existing = JSON.parse(stored);
+              userData.avatar = existing.avatar || null;
+            } catch (e) {}
+          }
+
+          localStorage.setItem('nexus_user', JSON.stringify(userData));
+
+          // Update sidebar
+          var sidebarName = document.querySelector('.sidebar-user-name');
+          var sidebarHandle = document.querySelector('.sidebar-user-handle');
+          if (sidebarName) sidebarName.textContent = userData.name;
+          if (sidebarHandle) sidebarHandle.textContent = userData.handle;
+
+          // Show toast
+          if (typeof showToast === 'function') {
+            showToast('Perfil atualizado com sucesso!', 'success');
+          }
+        });
+      }
+
+    });
+  </script>
+</body>
+</html>
