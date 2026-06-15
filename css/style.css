@@ -2,8 +2,33 @@
    NEXUS PAINEL — Design System & Global Styles
    ========================================== */
 
-/* --- Fonts: Fontshare --- */
+/* --- Fonts: Fontshare (Clash Display, General Sans) --- */
 @import url("https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=cabinet-grotesk@700,800&f[]=general-sans@400,500&display=swap");
+
+/* --- Space Grotesk (local — fonte do H1 hero) --- */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/SpaceGrotesk-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/SpaceGrotesk-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/SpaceGrotesk-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
 
 /* --- Bootstrap Icons --- */
 @import url("../node_modules/bootstrap-icons/font/bootstrap-icons.css");
@@ -113,11 +138,11 @@ ul, ol {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 }
 
-h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); }
+h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); line-height: 1.0; letter-spacing: -0.04em; }
 h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
 h3 { font-size: clamp(1.4rem, 2.5vw, 1.8rem); }
 h4 { font-size: 1.25rem; }
