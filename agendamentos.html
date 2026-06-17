@@ -26,7 +26,6 @@
         <a href="comunidade.html" class="sidebar-link"><i class="bi bi-people"></i> Comunidade</a>
         <a href="live-studio.html" class="sidebar-link">
           <i class="bi bi-camera-reels"></i> Live Studio
-          <span class="sidebar-live-badge pulse-red">AO VIVO</span>
         </a>
       </nav>
       <div class="sidebar-footer">
@@ -60,76 +59,14 @@
 
       <!-- Filters -->
       <div class="filter-pills">
-        <span class="filter-pill active">Todas <span class="count">(12)</span></span>
-        <span class="filter-pill">Agendada <span class="count">(5)</span></span>
-        <span class="filter-pill">Rascunho <span class="count">(4)</span></span>
-        <span class="filter-pill">Planejamento <span class="count">(3)</span></span>
+        <span class="filter-pill active" data-filter="todas">Todas <span class="count">(0)</span></span>
+        <span class="filter-pill" data-filter="agendada">Agendada <span class="count">(0)</span></span>
+        <span class="filter-pill" data-filter="rascunho">Rascunho <span class="count">(0)</span></span>
+        <span class="filter-pill" data-filter="planejamento">Planejamento <span class="count">(0)</span></span>
       </div>
 
       <!-- Schedule Cards -->
-      <div class="schedule-list">
-        <div class="schedule-card">
-          <div class="schedule-status-bar agendada"></div>
-          <div class="schedule-card-content">
-            <div class="schedule-card-header">
-              <h4>React Native na pr&aacute;tica</h4>
-              <span class="badge badge-green">Agendada</span>
-            </div>
-            <div class="schedule-meta">
-              <span><i class="bi bi-code-slash"></i> Desenvolvimento</span>
-              <span><i class="bi bi-calendar3"></i> 15 Jun 2026</span>
-              <span><i class="bi bi-clock"></i> 20:00 - 22:00</span>
-            </div>
-            <p class="schedule-description">Construindo um aplicativo completo com React Native, abordando navega&ccedil;&atilde;o, estado e API.</p>
-            <div class="schedule-actions">
-              <button class="btn-ghost btn-sm"><i class="bi bi-arrow-right-circle"></i> Mover para: Rascunho</button>
-              <button class="btn-ghost btn-sm" style="color:var(--error);"><i class="bi bi-trash3"></i></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="schedule-card">
-          <div class="schedule-status-bar rascunho"></div>
-          <div class="schedule-card-content">
-            <div class="schedule-card-header">
-              <h4>Review de hardware - Setup 2026</h4>
-              <span class="badge badge-yellow">Rascunho</span>
-            </div>
-            <div class="schedule-meta">
-              <span><i class="bi bi-tools"></i> Tecnologia</span>
-              <span><i class="bi bi-calendar3"></i> 18 Jun 2026</span>
-              <span><i class="bi bi-clock"></i> 19:30 - 21:30</span>
-            </div>
-            <p class="schedule-description">An&aacute;lise completa dos novos componentes de hardware para setup de streaming em 2026.</p>
-            <div class="schedule-actions">
-              <button class="btn-ghost btn-sm"><i class="bi bi-arrow-right-circle"></i> Mover para: Agendada</button>
-              <button class="btn-ghost btn-sm"><i class="bi bi-arrow-right-circle"></i> Mover para: Planejamento</button>
-              <button class="btn-ghost btn-sm" style="color:var(--error);"><i class="bi bi-trash3"></i></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="schedule-card">
-          <div class="schedule-status-bar planejamento"></div>
-          <div class="schedule-card-content">
-            <div class="schedule-card-header">
-              <h4>Q&A com a comunidade</h4>
-              <span class="badge badge-purple">Planejamento</span>
-            </div>
-            <div class="schedule-meta">
-              <span><i class="bi bi-chat-dots"></i> Comunidade</span>
-              <span><i class="bi bi-calendar3"></i> 20 Jun 2026</span>
-              <span><i class="bi bi-clock"></i> 21:00 - 22:30</span>
-            </div>
-            <p class="schedule-description">Sess&atilde;o de perguntas e respostas aberta para toda a comunidade.</p>
-            <div class="schedule-actions">
-              <button class="btn-ghost btn-sm"><i class="bi bi-arrow-right-circle"></i> Mover para: Agendada</button>
-              <button class="btn-ghost btn-sm"><i class="bi bi-arrow-right-circle"></i> Mover para: Rascunho</button>
-              <button class="btn-ghost btn-sm" style="color:var(--error);"><i class="bi bi-trash3"></i></button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="schedule-list" id="agendamentosContainer"></div>
     </main>
   </div>
 
@@ -203,6 +140,7 @@
     </div>
   </div>
 
+  <script src="js/api.js"></script>
   <script src="js/dashboard.js"></script>
 </body>
 </html>

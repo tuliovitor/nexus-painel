@@ -1,26 +1,15 @@
 /* ==========================================
-   NEXUS PAINEL — Auth Pages (Validation & Interaction)
-   ==========================================
-   Backend Integration Roadmap:
-   - Login:    POST /api/auth/login   { email, password } → { token, user }
-   - Register: POST /api/auth/register { name, username, email, password } → { token, user }
-   - Forgot:   POST /api/auth/forgot-password { email } → { message }
-   - Auth:     Store JWT in localStorage, attach via Authorization header
-   - Me:       GET /api/auth/me  (Authorization: Bearer <token>) → { user }
-   - Middleware: Validate token on every protected route
-   -------------------------------------------------------------- */
+   NEXUS PAINEL — Auth (login / cadastro)
+   ========================================== */
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* ---------- PASSWORD TOGGLE ---------- */
-  var toggles = document.querySelectorAll('.auth-password-toggle');
-
-  toggles.forEach(function (btn) {
+  // ---------- TOGGLE SENHA ----------
+  document.querySelectorAll('.auth-password-toggle').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var input = btn.parentElement.querySelector('input');
+      var input = this.parentElement.querySelector('.form-input');
       if (!input) return;
-      var icon = btn.querySelector('i');
-
+      var icon = this.querySelector('i');
       if (input.type === 'password') {
         input.type = 'text';
         if (icon) icon.className = 'bi bi-eye';
@@ -31,181 +20,191 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* ---------- LOGIN FORM ---------- */
+  // ---------- HELPERS ----------
+  function isValidEmail(str) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
+  }
+
+  function mostrarErro(id, msg) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = msg || '';
+    el.style.display = msg ? 'flex' : 'none';
+  }
+
+  function limparErro(inputId, errId) {
+    var inp = document.getElementById(inputId);
+    if (inp) inp.classList.remove('error');
+    mostrarErro(errId, '');
+  }
+
+  // ---------- LOGIN ----------
   var loginForm = document.getElementById('loginForm');
   if (loginForm) {
     loginForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      var valid = true;
 
       var email = document.getElementById('loginEmail');
-      var password = document.getElementById('loginPassword');
-      var emailError = document.getElementById('loginEmailError');
-      var passwordError = document.getElementById('loginPasswordError');
+      var senha = document.getElementById('loginPassword');
+      var btn = loginForm.querySelector('button[type="submit"]');
+      var btnText = btn ? btn.querySelector('.btn-text') : null;
 
-      // Email
-      if (!email.value || !isValidEmail(email.value)) {
-        email.classList.add('error');
-        emailError.classList.add('visible');
-        valid = false;
-      } else {
-        email.classList.remove('error');
-        emailError.classList.remove('visible');
+      limparErro('loginEmail', 'loginEmailError');
+      limparErro('loginPassword', 'loginPasswordError');
+
+      var valido = true;
+      if (!email || !isValidEmail(email.value)) {
+        mostrarErro('loginEmailError', 'E-mail inválido');
+        if (email) email.classList.add('error');
+        valido = false;
       }
-
-      // Password
-      if (!password.value || password.value.length < 8) {
-        password.classList.add('error');
-        passwordError.classList.add('visible');
-        valid = false;
-      } else {
-        password.classList.remove('error');
-        passwordError.classList.remove('visible');
+      if (!senha || senha.value.length < 8) {
+        mostrarErro('loginPasswordError', 'Senha deve ter no mínimo 8 caracteres');
+        if (senha) senha.classList.add('error');
+        valido = false;
       }
+      if (!valido) return;
 
-      if (valid) {
-        // Simulate loading
-        var btn = loginForm.querySelector('button[type="submit"]');
-        btn.classList.add('btn-loading');
+      if (btn) btn.disabled = true;
+      if (btnText) btnText.textContent = 'Entrando...';
 
-        // Save user data to localStorage (placeholder until backend is ready)
-        var userData = {
-          name: 'Lucas Silva',
-          handle: '@lucassilva',
-          email: email.value,
-          avatar: null
-        };
-        localStorage.setItem('nexus_user', JSON.stringify(userData));
-
-        setTimeout(function () {
-          btn.classList.remove('btn-loading');
-          window.location.href = 'dashboard.html';
-        }, 1200);
-      }
+      apiPost('/auth/login', {
+        email: email.value.trim(),
+        senha: senha.value
+      }).then(function (res) {
+        localStorage.setItem('nexus_user', JSON.stringify(res.usuario));
+        window.location.href = 'dashboard.html';
+      }).catch(function (err) {
+        mostrarErro('loginEmailError', err.message);
+        if (btn) btn.disabled = false;
+        if (btnText) btnText.textContent = 'Entrar';
+      });
     });
 
-    // Remove error on input
-    loginForm.querySelectorAll('.form-input').forEach(function (input) {
-      input.addEventListener('input', function () {
-        this.classList.remove('error');
-        var errorEl = this.parentElement.querySelector('.form-error');
-        if (errorEl) errorEl.classList.remove('visible');
-      });
+    // Limpar erros ao digitar
+    document.getElementById('loginEmail') && document.getElementById('loginEmail').addEventListener('input', function () {
+      limparErro('loginEmail', 'loginEmailError');
+    });
+    document.getElementById('loginPassword') && document.getElementById('loginPassword').addEventListener('input', function () {
+      limparErro('loginPassword', 'loginPasswordError');
     });
   }
 
-  /* ---------- REGISTER FORM ---------- */
+  // ---------- CADASTRO ----------
   var registerForm = document.getElementById('registerForm');
   if (registerForm) {
     registerForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      var valid = true;
 
-      var name = document.getElementById('regName');
+      var nome     = document.getElementById('regName');
       var username = document.getElementById('regUsername');
-      var email = document.getElementById('regEmail');
-      var password = document.getElementById('regPassword');
-      var confirm = document.getElementById('regConfirm');
+      var email    = document.getElementById('regEmail');
+      var senha    = document.getElementById('regPassword');
+      var confirm  = document.getElementById('regConfirm');
+      var btn = registerForm.querySelector('button[type="submit"]');
+      var btnText = btn ? btn.querySelector('.btn-text') : null;
 
-      var fields = [
-        { el: name, error: 'regNameError', test: function (v) { return v.trim().length > 0; } },
-        { el: username, error: 'regUsernameError', test: function (v) { return v.trim().length > 0; } },
-        { el: email, error: 'regEmailError', test: function (v) { return isValidEmail(v); } },
-        { el: password, error: 'regPasswordError', test: function (v) { return v.length >= 8; } },
-        { el: confirm, error: 'regConfirmError', test: function (v) { return v === password.value; } }
-      ];
-
-      fields.forEach(function (f) {
-        var errorEl = document.getElementById(f.error);
-        if (!f.test(f.el.value)) {
-          f.el.classList.add('error');
-          if (errorEl) errorEl.classList.add('visible');
-          valid = false;
-        } else {
-          f.el.classList.remove('error');
-          if (errorEl) errorEl.classList.remove('visible');
-        }
+      ['regName','regUsername','regEmail','regPassword','regConfirm'].forEach(function (id) {
+        limparErro(id, id + 'Error');
       });
 
-      if (valid) {
-        var btn = registerForm.querySelector('button[type="submit"]');
-        btn.classList.add('btn-loading');
+      var valido = true;
 
-        // Save user data to localStorage
-        var userData = {
-          name: name.value.trim(),
-          handle: '@' + username.value.trim(),
-          email: email.value,
-          avatar: null
-        };
-        localStorage.setItem('nexus_user', JSON.stringify(userData));
-
-        setTimeout(function () {
-          btn.classList.remove('btn-loading');
-          window.location.href = 'dashboard.html';
-        }, 1200);
+      if (!nome || !nome.value.trim()) {
+        mostrarErro('regNameError', 'Nome obrigatório');
+        if (nome) nome.classList.add('error');
+        valido = false;
       }
+      if (!username || !username.value.trim()) {
+        mostrarErro('regUsernameError', 'Usuário obrigatório');
+        if (username) username.classList.add('error');
+        valido = false;
+      }
+      if (!email || !isValidEmail(email.value)) {
+        mostrarErro('regEmailError', 'E-mail inválido');
+        if (email) email.classList.add('error');
+        valido = false;
+      }
+      if (!senha || senha.value.length < 8) {
+        mostrarErro('regPasswordError', 'Senha deve ter no mínimo 8 caracteres');
+        if (senha) senha.classList.add('error');
+        valido = false;
+      }
+      if (!confirm || confirm.value !== senha.value) {
+        mostrarErro('regConfirmError', 'Senhas não conferem');
+        if (confirm) confirm.classList.add('error');
+        valido = false;
+      }
+      if (!valido) return;
+
+      if (btn) btn.disabled = true;
+      if (btnText) btnText.textContent = 'Criando...';
+
+      apiPost('/auth/register', {
+        nome: nome.value.trim(),
+        username: username.value.trim(),
+        email: email.value.trim(),
+        senha: senha.value
+      }).then(function (res) {
+        localStorage.setItem('nexus_user', JSON.stringify(res.usuario));
+        window.location.href = 'dashboard.html';
+      }).catch(function (err) {
+        mostrarErro('regEmailError', err.message);
+        if (btn) btn.disabled = false;
+        if (btnText) btnText.textContent = 'Criar conta';
+      });
     });
 
-    registerForm.querySelectorAll('.form-input').forEach(function (input) {
-      input.addEventListener('input', function () {
-        this.classList.remove('error');
-        var parent = this.parentElement;
-        var errorEl = parent.querySelector('.form-error') ||
-                       this.closest('.form-group').querySelector('.form-error');
-        if (errorEl) errorEl.classList.remove('visible');
-      });
+    ['regName','regUsername','regEmail','regPassword','regConfirm'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', function () {
+          limparErro(id, id + 'Error');
+        });
+      }
     });
   }
 
-  /* ---------- FORGOT PASSWORD FORM ---------- */
+  // ---------- ESQUECI SENHA ----------
   var forgotForm = document.getElementById('forgotForm');
   if (forgotForm) {
     forgotForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      var valid = true;
 
       var email = document.getElementById('forgotEmail');
-      var emailError = document.getElementById('forgotEmailError');
+      var btn = forgotForm.querySelector('button[type="submit"]');
+      var btnText = btn ? btn.querySelector('.btn-text') : null;
 
-      if (!email.value || !isValidEmail(email.value)) {
-        email.classList.add('error');
-        emailError.classList.add('visible');
-        valid = false;
-      } else {
-        email.classList.remove('error');
-        emailError.classList.remove('visible');
+      limparErro('forgotEmail', 'forgotEmailError');
+
+      if (!email || !isValidEmail(email.value)) {
+        mostrarErro('forgotEmailError', 'E-mail inválido');
+        if (email) email.classList.add('error');
+        return;
       }
 
-      if (valid) {
-        var btn = forgotForm.querySelector('button[type="submit"]');
-        var successMsg = document.getElementById('forgotSuccess');
+      if (btn) btn.disabled = true;
+      if (btnText) btnText.textContent = 'Enviando...';
 
-        btn.classList.add('btn-loading');
-        setTimeout(function () {
-          btn.classList.remove('btn-loading');
-          btn.style.display = 'none';
-          // Hide form fields, show success
-          forgotForm.querySelectorAll('.form-group, .auth-divider, .auth-footer-link').forEach(function (el) {
-            el.style.display = 'none';
-          });
+      apiPost('/auth/forgot-password', { email: email.value.trim() })
+        .then(function () {
+          var successMsg = document.getElementById('forgotSuccess');
           if (successMsg) successMsg.classList.add('visible');
-        }, 1500);
-      }
+          forgotForm.querySelector('button[type="submit"]').style.display = 'none';
+        })
+        .catch(function (err) {
+          mostrarErro('forgotEmailError', err.message);
+          if (btn) btn.disabled = false;
+          if (btnText) btnText.textContent = 'Enviar link';
+        });
     });
 
-    forgotForm.querySelectorAll('.form-input').forEach(function (input) {
-      input.addEventListener('input', function () {
-        this.classList.remove('error');
-        var errorEl = this.parentElement.querySelector('.form-error');
-        if (errorEl) errorEl.classList.remove('visible');
+    var forgotEmail = document.getElementById('forgotEmail');
+    if (forgotEmail) {
+      forgotEmail.addEventListener('input', function () {
+        limparErro('forgotEmail', 'forgotEmailError');
       });
-    });
-  }
-
-  /* ---------- HELPER: Email validation ---------- */
-  function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
   }
 
 });

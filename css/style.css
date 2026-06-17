@@ -4,6 +4,7 @@
 
 /* --- Fonts: Fontshare (Clash Display, General Sans) --- */
 @import url("https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=cabinet-grotesk@700,800&f[]=general-sans@400,500&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
 /* --- Space Grotesk (local — fonte do H1 hero) --- */
 @font-face {
@@ -29,9 +30,6 @@
   font-weight: 700;
   font-display: swap;
 }
-
-/* --- Bootstrap Icons --- */
-@import url("../node_modules/bootstrap-icons/font/bootstrap-icons.css");
 
 /* --- CSS Custom Properties (Design Tokens) --- */
 :root {

@@ -25,7 +25,6 @@
         <a href="comunidade.html" class="sidebar-link active"><i class="bi bi-people"></i> Comunidade</a>
         <a href="live-studio.html" class="sidebar-link">
           <i class="bi bi-camera-reels"></i> Live Studio
-          <span class="sidebar-live-badge pulse-red">AO VIVO</span>
         </a>
       </nav>
       <div class="sidebar-footer">
@@ -54,8 +53,8 @@
           <h2 style="font-size:1.6rem;font-weight:700;">Minha comunidade</h2>
         </div>
         <div style="display:flex;gap:12px;">
-          <button class="btn-secondary btn-sm"><i class="bi bi-megaphone"></i> Notificar todos</button>
-          <button class="btn-primary btn-sm"><i class="bi bi-gift"></i> Gift sub</button>
+          <button class="btn-secondary btn-sm" id="notifyAllBtn"><i class="bi bi-megaphone"></i> Notificar todos</button>
+          <button class="btn-primary btn-sm" id="giftSubBtn"><i class="bi bi-gift"></i> Gift sub</button>
         </div>
       </div>
 
@@ -63,25 +62,25 @@
       <div class="kpi-grid">
         <div class="kpi-card community-kpi">
           <div class="kpi-icon"><i class="bi bi-people"></i></div>
-          <div class="kpi-value">8.452</div>
+          <div class="kpi-value" id="totalFollowers">8.452</div>
           <div class="kpi-label">Total de seguidores</div>
           <div class="kpi-change up"><i class="bi bi-arrow-up-short"></i> +127 esta semana</div>
         </div>
         <div class="kpi-card community-kpi">
           <div class="kpi-icon" style="background:rgba(74,222,128,0.1);color:var(--success);"><i class="bi bi-person-check"></i></div>
-          <div class="kpi-value">342</div>
+          <div class="kpi-value" id="totalMembers">342</div>
           <div class="kpi-label">Online agora (de 2.180 regulares)</div>
           <div class="kpi-change up"><i class="bi bi-arrow-up-short"></i> +18% vs ontem</div>
         </div>
         <div class="kpi-card community-kpi">
           <div class="kpi-icon" style="background:rgba(251,191,36,0.1);color:var(--warning);"><i class="bi bi-chat-dots"></i></div>
-          <div class="kpi-value">2.847</div>
+          <div class="kpi-value" id="totalHoursWatched">2.847</div>
           <div class="kpi-label">Msgs no chat (&uacute;ltima live)</div>
           <div class="kpi-change up"><i class="bi bi-arrow-up-short"></i> +32.1%</div>
         </div>
         <div class="kpi-card community-kpi">
           <div class="kpi-icon" style="background:rgba(139,66,255,0.1);color:var(--nexus-purple-light);"><i class="bi bi-graph-up"></i></div>
-          <div class="kpi-value">14.6<small style="font-size:0.9rem;">%</small></div>
+          <div class="kpi-value" id="engagementRate">14.6<small style="font-size:0.9rem;">%</small></div>
           <div class="kpi-label">Taxa de engajamento</div>
           <div class="kpi-change up"><i class="bi bi-arrow-up-short"></i> +2.4% este m&ecirc;s</div>
         </div>
@@ -104,56 +103,7 @@
           <div class="chart-card-header">
             <h4>Distribui&ccedil;&atilde;o de n&iacute;veis</h4>
           </div>
-          <div class="level-distribution">
-            <div class="level-bar-item">
-              <div class="level-bar-icon" style="color:var(--warning);"><i class="bi bi-star-fill"></i></div>
-              <div class="level-bar-info">
-                <div class="level-bar-label">
-                  <span>VIP</span>
-                  <span>124</span>
-                </div>
-                <div class="level-bar-track">
-                  <div class="level-bar-fill vip" style="width:62%;"></div>
-                </div>
-              </div>
-            </div>
-            <div class="level-bar-item">
-              <div class="level-bar-icon" style="color:var(--success);"><i class="bi bi-shield-fill-check"></i></div>
-              <div class="level-bar-info">
-                <div class="level-bar-label">
-                  <span>MOD</span>
-                  <span>48</span>
-                </div>
-                <div class="level-bar-track">
-                  <div class="level-bar-fill mod" style="width:24%;"></div>
-                </div>
-              </div>
-            </div>
-            <div class="level-bar-item">
-              <div class="level-bar-icon" style="color:var(--nexus-purple-light);"><i class="bi bi-heart-fill"></i></div>
-              <div class="level-bar-info">
-                <div class="level-bar-label">
-                  <span>SUB</span>
-                  <span>892</span>
-                </div>
-                <div class="level-bar-track">
-                  <div class="level-bar-fill sub" style="width:88%;"></div>
-                </div>
-              </div>
-            </div>
-            <div class="level-bar-item">
-              <div class="level-bar-icon" style="color:var(--text-tertiary);"><i class="bi bi-person-fill"></i></div>
-              <div class="level-bar-info">
-                <div class="level-bar-label">
-                  <span>NEW</span>
-                  <span>7.388</span>
-                </div>
-                <div class="level-bar-track">
-                  <div class="level-bar-fill new" style="width:100%;"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="level-distribution"></div>
         </div>
       </div>
 
@@ -162,15 +112,15 @@
         <div class="dashboard-section-header">
           <h3>Membros ativos</h3>
           <div style="display:flex;gap:12px;">
-            <input class="form-input" style="padding:8px 14px;width:200px;font-size:0.85rem;" placeholder="Buscar membro...">
+            <input class="form-input" id="memberSearch" style="padding:8px 14px;width:200px;font-size:0.85rem;" placeholder="Buscar membro...">
           </div>
         </div>
 
-        <div class="filter-pills" style="margin-bottom:16px;">
-          <span class="filter-pill active">Todos</span>
-          <span class="filter-pill">VIP</span>
-          <span class="filter-pill">MOD</span>
-          <span class="filter-pill">SUB</span>
+        <div class="filter-pills members-filter" style="margin-bottom:16px;">
+          <span class="filter-pill active" data-filter="todos">Todos</span>
+          <span class="filter-pill" data-filter="VIP">VIP</span>
+          <span class="filter-pill" data-filter="MOD">MOD</span>
+          <span class="filter-pill" data-filter="SUB">SUB</span>
         </div>
 
         <div class="card" style="padding:0;overflow:hidden;">
@@ -180,72 +130,13 @@
                 <tr>
                   <th>Membro</th>
                   <th>N&iacute;vel</th>
-                  <th>Tempo</th>
-                  <th>Msgs</th>
-                  <th>Gifts</th>
+                  <th>Seguidores</th>
+                  <th>Horas</th>
+                  <th>&Uacute;ltima visita</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <div class="member-cell">
-                      <div class="sidebar-avatar" style="background:rgba(251,191,36,0.15);color:var(--warning);">R</div>
-                      <div>
-                        <div class="viewer-name">Rafael Costa</div>
-                        <div>@rafacosta</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="viewer-level-badge vip">VIP</span></td>
-                  <td style="color:var(--text-secondary);">42h</td>
-                  <td style="color:var(--text-secondary);">1.247</td>
-                  <td style="color:var(--text-secondary);">23</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="member-cell">
-                      <div class="sidebar-avatar" style="background:rgba(139,66,255,0.15);color:var(--nexus-purple-light);">M</div>
-                      <div>
-                        <div class="viewer-name">Maria Oliveira</div>
-                        <div>@mariaoli</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="viewer-level-badge sub">SUB</span></td>
-                  <td style="color:var(--text-secondary);">38h</td>
-                  <td style="color:var(--text-secondary);">982</td>
-                  <td style="color:var(--text-secondary);">15</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="member-cell">
-                      <div class="sidebar-avatar" style="background:rgba(74,222,128,0.15);color:var(--success);">J</div>
-                      <div>
-                        <div class="viewer-name">Jo&atilde;o Santos</div>
-                        <div>@jsantos</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="viewer-level-badge mod">MOD</span></td>
-                  <td style="color:var(--text-secondary);">31h</td>
-                  <td style="color:var(--text-secondary);">756</td>
-                  <td style="color:var(--text-secondary);">8</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="member-cell">
-                      <div class="sidebar-avatar" style="background:rgba(139,66,255,0.15);color:var(--nexus-purple-light);">A</div>
-                      <div>
-                        <div class="viewer-name">Ana Pereira</div>
-                        <div>@anaper</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="viewer-level-badge sub">SUB</span></td>
-                  <td style="color:var(--text-secondary);">27h</td>
-                  <td style="color:var(--text-secondary);">634</td>
-                  <td style="color:var(--text-secondary);">12</td>
-                </tr>
+                <tr><td colspan="5" style="text-align:center;padding:32px;color:var(--text-tertiary);">Carregando membros...</td></tr>
               </tbody>
             </table>
           </div>
@@ -255,6 +146,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/dashboard.js"></script>
 </body>
 </html>

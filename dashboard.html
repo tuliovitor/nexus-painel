@@ -34,7 +34,6 @@
         </a>
         <a href="live-studio.html" class="sidebar-link">
           <i class="bi bi-camera-reels"></i> Live Studio
-          <span class="sidebar-live-badge pulse-red">AO VIVO</span>
         </a>
       </nav>
 
@@ -66,7 +65,7 @@
           <div class="date-display" id="dateDisplay"></div>
         </div>
         <div class="dashboard-header-right">
-          <span class="badge badge-red pulse-red"><i class="bi bi-broadcast"></i> Ao vivo agora</span>
+          <span class="badge badge-red pulse-red" style="display:none;"><i class="bi bi-broadcast"></i> Ao vivo agora</span>
           <button class="btn-primary btn-sm" data-action="nova-live"><i class="bi bi-plus-lg"></i> Nova live</button>
         </div>
       </div>
@@ -75,25 +74,25 @@
       <div class="kpi-grid">
         <div class="kpi-card">
           <div class="kpi-icon"><i class="bi bi-eye"></i></div>
-          <div class="kpi-value">12.458</div>
+          <div class="kpi-value" id="totalViews">12.458</div>
           <div class="kpi-label">Visualiza&ccedil;&otilde;es (7d)</div>
           <div class="kpi-change up"><i class="bi bi-arrow-up-short"></i> +23.4%</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon" style="background:rgba(74,222,128,0.1);color:var(--success);"><i class="bi bi-person-plus"></i></div>
-          <div class="kpi-value">347</div>
+          <div class="kpi-value" id="totalFollowers">347</div>
           <div class="kpi-label">Novos seguidores</div>
           <div class="kpi-change up"><i class="bi bi-arrow-up-short"></i> +12.8%</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon" style="background:rgba(251,191,36,0.1);color:var(--warning);"><i class="bi bi-clock"></i></div>
-          <div class="kpi-value">186</div>
+          <div class="kpi-value" id="totalHours">186</div>
           <div class="kpi-label">Horas transmitidas</div>
           <div class="kpi-change up"><i class="bi bi-arrow-up-short"></i> +5.2%</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon" style="background:rgba(248,113,113,0.1);color:var(--error);"><i class="bi bi-people"></i></div>
-          <div class="kpi-value">2.380</div>
+          <div class="kpi-value" id="avgViewers">2.380</div>
           <div class="kpi-label">Avg. espectadores</div>
           <div class="kpi-change down"><i class="bi bi-arrow-down-short"></i> -3.1%</div>
         </div>
@@ -124,51 +123,7 @@
         <!-- Top Viewers -->
         <div class="top-viewers-card">
           <h4>Top viewers</h4>
-          <div class="viewer-item">
-            <span class="viewer-rank">01</span>
-            <div class="viewer-avatar-sm" style="background:rgba(251,191,36,0.15);color:var(--warning);">R</div>
-            <div class="viewer-info">
-              <div class="viewer-name">Rafael Costa</div>
-            </div>
-            <span class="viewer-level-badge vip">VIP</span>
-            <span class="viewer-time">42h</span>
-          </div>
-          <div class="viewer-item">
-            <span class="viewer-rank">02</span>
-            <div class="viewer-avatar-sm" style="background:rgba(139,66,255,0.15);color:var(--nexus-purple-light);">M</div>
-            <div class="viewer-info">
-              <div class="viewer-name">Maria Oliveira</div>
-            </div>
-            <span class="viewer-level-badge sub">SUB</span>
-            <span class="viewer-time">38h</span>
-          </div>
-          <div class="viewer-item">
-            <span class="viewer-rank">03</span>
-            <div class="viewer-avatar-sm" style="background:rgba(74,222,128,0.15);color:var(--success);">J</div>
-            <div class="viewer-info">
-              <div class="viewer-name">Jo&atilde;o Santos</div>
-            </div>
-            <span class="viewer-level-badge mod">MOD</span>
-            <span class="viewer-time">31h</span>
-          </div>
-          <div class="viewer-item">
-            <span class="viewer-rank">04</span>
-            <div class="viewer-avatar-sm" style="background:rgba(139,66,255,0.15);color:var(--nexus-purple-light);">A</div>
-            <div class="viewer-info">
-              <div class="viewer-name">Ana Pereira</div>
-            </div>
-            <span class="viewer-level-badge sub">SUB</span>
-            <span class="viewer-time">27h</span>
-          </div>
-          <div class="viewer-item">
-            <span class="viewer-rank">05</span>
-            <div class="viewer-avatar-sm" style="background:rgba(255,255,255,0.1);color:var(--text-secondary);">P</div>
-            <div class="viewer-info">
-              <div class="viewer-name">Pedro Lima</div>
-            </div>
-            <span class="viewer-level-badge" style="background:rgba(255,255,255,0.06);color:var(--text-secondary);">NEW</span>
-            <span class="viewer-time">15h</span>
-          </div>
+          <div class="top-viewers-list"></div>
         </div>
       </div>
 
@@ -208,40 +163,7 @@
           <a href="#" style="font-size:0.85rem;">Ver todas <i class="bi bi-arrow-right"></i></a>
         </div>
         <div class="recent-lives">
-          <div class="recent-live-item">
-            <div class="recent-live-thumb"><i class="bi bi-play-fill"></i></div>
-            <div class="recent-live-info">
-              <div class="recent-live-title">React Native na pr&aacute;tica - Criando um app do zero</div>
-              <div class="recent-live-meta">
-                <span class="recent-live-badge">LIVE</span>
-                <span>12 Jun, 20:00</span>
-                <span>&middot; 2h14min</span>
-              </div>
-            </div>
-            <span class="recent-live-views"><i class="bi bi-eye"></i> 3.124</span>
-          </div>
-          <div class="recent-live-item">
-            <div class="recent-live-thumb"><i class="bi bi-play-fill"></i></div>
-            <div class="recent-live-info">
-              <div class="recent-live-title">Review de hardware - Setup 2026</div>
-              <div class="recent-live-meta">
-                <span>10 Jun, 19:30</span>
-                <span>&middot; 1h48min</span>
-              </div>
-            </div>
-            <span class="recent-live-views"><i class="bi bi-eye"></i> 2.890</span>
-          </div>
-          <div class="recent-live-item">
-            <div class="recent-live-thumb"><i class="bi bi-play-fill"></i></div>
-            <div class="recent-live-info">
-              <div class="recent-live-title">Q&A com a comunidade - Suas perguntas respondidas</div>
-              <div class="recent-live-meta">
-                <span>08 Jun, 21:00</span>
-                <span>&middot; 1h02min</span>
-              </div>
-            </div>
-            <span class="recent-live-views"><i class="bi bi-eye"></i> 4.567</span>
-          </div>
+          <div id="recentLivesList"></div>
         </div>
       </div>
 
@@ -319,6 +241,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/dashboard.js"></script>
 </body>
 </html>
