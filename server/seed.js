@@ -10,7 +10,7 @@ require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') }
 async function seed() {
   var dbConf;
   if (process.env.DATABASE_URL) {
-    dbConf = { uri: process.env.DATABASE_URL };
+    dbConf = { uri: process.env.DATABASE_URL, multipleStatements: true };
   } else {
     dbConf = {
       host:     process.env.DB_HOST || 'localhost',

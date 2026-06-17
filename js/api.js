@@ -1,13 +1,16 @@
 /* ==========================================
    NEXUS PAINEL — API Helper
    ==========================================
-   API_BASE: configuração automática.
-   - Se window.__API_BASE__ estiver definido, usa esse valor (útil para GitHub Pages
-     apontar para o Railway)
-   - Caso contrário, usa o mesmo domínio (funciona no Railway e localhost)
+   API_BASE: se window.__API_BASE__ estiver definido, usa esse valor.
+   Se estiver no GitHub Pages (hostname contendo github.io), usa a URL do Railway.
+   Caso contrário, usa o mesmo domínio (funciona no Railway e localhost).
    ========================================== */
 
-var API_BASE = window.__API_BASE__ || window.location.origin + '/api';
+var API_BASE = window.__API_BASE__ || (
+  location.hostname.indexOf('github.io') !== -1
+    ? 'https://nexus-painel-production.up.railway.app/api'
+    : location.origin + '/api'
+);
 
 function apiRequest(method, path, data) {
   var opts = {
