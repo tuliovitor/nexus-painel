@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function () {
           var id = this.getAttribute('data-id');
           apiDel('/agendamentos/' + id)
             .then(function () {
-              showToast('Agendamento exclu&iacute;do', 'success');
+              showToast('Agendamento excluído', 'success');
               loadAgendamentos();
             })
             .catch(function (err) { showToast(err.message, 'error'); });
@@ -471,7 +471,7 @@ document.addEventListener('DOMContentLoaded', function () {
             submitBtn.disabled = false;
             if (submitText) submitText.textContent = 'Criar live';
             closeModal();
-            showToast('Live <strong>' + escapeHtml(payload.titulo) + '</strong> criada!', 'success');
+            showToast('Live ' + payload.titulo + ' criada!', 'success');
             // Reload agendamentos if on that page
             if (page === 'agendamentos.html') {
               loadAgendamentos();
@@ -1045,7 +1045,7 @@ document.addEventListener('DOMContentLoaded', function () {
           bitrate: bitrate ? parseInt(bitrate.value) : undefined,
           servidor_ingest: servidor ? servidor.value : undefined
         }).then(function () {
-          showToast('Configura&ccedil;&otilde;es salvas!', 'success');
+          showToast('Configurações salvas!', 'success');
         }).catch(function (err) {
           showToast(err.message, 'error');
         });
@@ -1076,7 +1076,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!atual || !nova || !confirm) return;
         if (nova.value.length < 8) { showToast('Nova senha deve ter 8+ caracteres', 'error'); return; }
-        if (nova.value !== confirm.value) { showToast('Senhas n&atilde;o conferem', 'error'); return; }
+        if (nova.value !== confirm.value) { showToast('Senhas não conferem', 'error'); return; }
 
         apiPut('/config/change-password', {
           usuario_id: user.id,
